@@ -1,5 +1,5 @@
 # TaskFlow
-A project management tool designed to help teams to plan and track the development of each project, made using [Angular CLI] version 22.2.0.
+A project management tool designed to help teams to plan and track the development of each project, made using Angular version 22.2.0.
 
 ## Development server
 
