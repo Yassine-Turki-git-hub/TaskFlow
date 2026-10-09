@@ -1,21 +1,24 @@
-[
+import {ProjectModel} from '../models/project.model';
+import {TypeStatus} from '../models/type-status';
+import {TypePriority} from '../models/type-priority';
+export const PROJECTS_DATA : ProjectModel[] = [
     {
         id: 1,
         name: 'Projet 1',
         description: 'Description du projet 1',
-        status: 'En cours',
+        status: TypeStatus.EnCours,
         tasks: [
             {
                 id: 1,
                 title: 'Tâche 1',
-                priority: 'Haute',
-                status: 'En attente'
+                priority: TypePriority.Haute,
+                status: TypeStatus.EnAttente
             },
             {
                 id: 2,
                 title: 'Tâche 2',
-                priority: 'Moyenne',
-                status: 'En cours'
+                priority: TypePriority.Moyenne,
+                status: TypeStatus.EnCours
             }
         ]
     },
@@ -23,25 +26,25 @@
         id: 2,
         name: 'Projet 2',
         description: 'Description du projet 2',
-        status: 'En attente',
+        status: TypeStatus.EnAttente,
         tasks: [
             {
                 id: 1,
                 title: 'Tâche 1',
-                priority: 'Moyenne',
-                status: 'Terminé'
+                priority: TypePriority.Moyenne,
+                status: TypeStatus.Termine
             },
             {
                 id: 2,
                 title: 'Tâche 2',
-                priority: 'Basse',
-                status: 'En cours'
+                priority: TypePriority.Basse,
+                status: TypeStatus.EnCours
             },
             {
                 id: 3,
                 title: 'Tâche 3',
-                priority: 'Haute',
-                status: 'En attente'
+                priority: TypePriority.Haute,
+                status: TypeStatus.EnAttente
             }
         ]
     },
@@ -49,31 +52,31 @@
         id: 3,
         name: 'Projet 3',
         description: 'Description du projet 3',
-        status: 'Terminé',
+        status: TypeStatus.Termine,
         tasks: [
             {
                 id: 1,
                 title: 'Tâche 1',
-                priority: 'Moyenne',
-                status: 'Terminé'
+                priority: TypePriority.Moyenne,
+                status: TypeStatus.EnAttente
             },
             {
                 id: 2,
                 title: 'Tâche 2',
-                priority: 'Basse',
-                status: 'En cours'
+                priority: TypePriority.Basse,
+                status: TypeStatus.EnCours
             },
             {
                 id: 3,
                 title: 'Tâche 3',
-                priority: 'Haute',
-                status: 'En attente'
+                priority: TypePriority.Haute,
+                status: TypeStatus.EnAttente
             },
             {
                 id: 4,
                 title: 'Tâche 4',
-                priority: 'Haute',
-                status: 'En cours'
+                priority: TypePriority.Haute,
+                status: TypeStatus.EnCours
             }
         ]
     }
