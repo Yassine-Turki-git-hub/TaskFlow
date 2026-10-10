@@ -4,9 +4,6 @@ import { PROJECTS_DATA } from '../../features/projects/data/projects.data';
 import { Observable, of } from 'rxjs';
 
 @Service()
-@Injectable({
-    providedIn: 'root'
-})
 export class ProjectService {
     getProjects(): ProjectModel[] {
         return PROJECTS_DATA;

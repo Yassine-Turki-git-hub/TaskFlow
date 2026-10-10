@@ -1,1 +1,15 @@
-<p>project-list works!</p>
+<div class="project-list-container">
+    <h1>Liste des projets:</h1>
+    <!--barre de recherche de projet selon leur description ou nom ou l'id-->
+    <div class=""search-bar>
+        <input type="text" placeholder="Rechercher un projet par id ou nom ou description" [(ngModel)]="searchTerm" (input)="onSearchChange()"/>
+    </div>
+    <!--Liste des proejct cards-->
+    <div class="cards-grid">
+        @for (proj of projects; track proj.id) {
+            <app-project-card [project]="proj" (selectProject)="handleProjectSelection($event)"></app-project-card>
+        } @empty {
+            <p>Aucun projet.</p>
+        }
+    </div>
+</div>
