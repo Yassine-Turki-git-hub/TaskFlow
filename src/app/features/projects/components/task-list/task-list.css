@@ -1,0 +1,79 @@
+.task-list-container {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+}
+h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+}
+.task-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border-left: 5px solid #ccc;
+    background-color: #fdfdfd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+.task-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.task-title {
+    font-size: 14px;
+    color: #2c3e50;
+}
+    
+/* Styles dynamiques selon le statut (bordure gauche) */
+.task-item.status-todo {
+    border-left-color: #6c757d; /* Gris */
+    background-color: #f8f9fa;
+}
+.task-item.status-in-progress {
+    border-left-color: #ffc107; /* Orange / Jaune */
+    background-color: #fff9db;
+}
+.task-item.status-done {
+    border-left-color: #28a745; /* Vert */
+    background-color: #e6fcf5;
+}
+.task-item.status-done .task-title {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+/* Badges de priorité */
+.priority-badge {
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+.priority-low { background-color: #e2f0d9; color: #385723; }
+.priority-medium { background-color: #fff2cc; color: #7f6000; }
+.priority-high { background-color: #f8cecc; color: #c00000; }
+
+.status-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #555;
+}
+.no-tasks {
+    color: #888;
+    font-style: italic;
+    font-size: 13px;
+    margin: 0;
+}

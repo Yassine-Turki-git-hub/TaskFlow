@@ -1,1 +1,22 @@
-<p>task-list works!</p>
+<div class="task-list-container">
+    <h3>Liste des taches</h3>
+    @if (tasks && tasks.length > 0){
+        <ul class="task-items">
+            @for(task of tasks; track task.id){
+                <li class="task-item" [ngClass]="getStatusClass(task.status)">
+                    <div class="task-info">
+                        <span class="task-title">{{task.id}}: {{task.title}}</span>
+                        <span class="priority-badge" [ngClass]="getPriorityClass(task.priority)">
+                            {{task.priority}}
+                        </span>
+                    </div>
+                    <div class="task-meta">
+                        <span class="status-label">{{task.status}}</span>
+                    </div>
+                </li>
+            }
+        </ul>
+    } @else {
+        <p class="no-tasks">Aucune tache disponible.</p>
+    }
+</div>
