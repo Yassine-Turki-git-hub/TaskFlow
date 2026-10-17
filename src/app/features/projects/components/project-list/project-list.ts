@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProjectCard } from '../project-card/project-card';
@@ -14,21 +14,23 @@ import { ProjectModel } from '../../models/project.model';
 })
 export class ProjectList implements OnInit {
   private projectService = inject(ProjectService);
-  projects: ProjectModel[] = [];
-  filteredProjects: ProjectModel[] = [];
-  searchTerm: string= '';
+  projects = signal<ProjectModel[]>([]);
+  searchTerm = signal<string>('');
+  filteredProjects = computed(() =>{
+    const term = this.searchTerm().toLowerCase().trim();
+    const currentProjects = this.projects();
+    if (!term){
+      return currentProjects;
+    }
+
+    return currentProjects.filter(project => project.id.toString() === term || project.name.toLowerCase().includes(term) || project.description.toLowerCase().includes(term));
+  } );
+  
   
   ngOnInit(): void {
-      this.projects = this.projectService.getProjects();
-      this.filteredProjects = [...this.projects];
-  }
-  onSearchChange() : void {
-    const term = this.searchTerm.toLowerCase().trim();
-    if (!term) {
-      this.filteredProjects = [...this.projects];
-      return;
-    }
-    this.filteredProjects = this.projects.filter(project => project.id.toString() === term || project.name.toLowerCase().includes(term) || project.description.toLowerCase().includes(term));
+      this.projectService.getProjects$().subscribe(projectsData => {
+        this.projects.set(projectsData);
+      });
   }
   handleProjectSelection(selectedProject: ProjectModel): void {
     console.log("Projet sélectionné:", selectedProject.name);

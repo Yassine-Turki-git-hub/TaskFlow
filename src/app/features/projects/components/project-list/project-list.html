@@ -1,16 +1,21 @@
-<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between cursor-pointer">
-    <div>
-        <h1>Liste des projets:</h1>
-        <!--barre de recherche de projet selon leur description ou nom ou l'id-->
-        <div class="flex justify-between items-start gap-4 mb-3">
-            <input type="text" placeholder="Rechercher un projet par id ou nom ou description" [(ngModel)]="searchTerm" (input)="onSearchChange()"/>
-        </div>
+<div class="max-w-7xl mx-auto p-6">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Gestion des projets</h2>
+    <div class="mb-8">
+        <input 
+            type="text"
+            placeholder="Rechercher un projet par id, titre ou description"
+            [ngModel]="searchTerm()"
+            (ngModelChange)="searchTerm.set($event)"
+            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm text-gray-700 bg-white"
+        />
         <!--Liste des proejct cards-->
-        <div class="cards-grid">
-            @for (proj of filteredProjects; track proj.id) {
-                <app-project-card [project]="proj" (selectProject)="handleProjectSelection($event)"></app-project-card>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @for (proj of filteredProjects(); track proj.id) {
+                <app-project-card [project]="proj"></app-project-card>
             } @empty {
-                <p>Aucun projet.</p>
+                <div class="col-span-full text-center py-12 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+                    <p class="text-gray-500 text-lg">Aucun projet ne correspond à votre recherche.</p>
+                </div>
             }
         </div>
     </div>
