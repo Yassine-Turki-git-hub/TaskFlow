@@ -14,22 +14,30 @@ import { CommonModule } from '@angular/common';
 export class TaskList {
   @Input({required: true}) tasks: TaskModel[] = [];
   //retourner la classe css corespondantau statut
-  getStatusClass(status: TypeStatus):string {
-    switch(status){
-      case TypeStatus.EnAttente: return 'status-todo';
-      case TypeStatus.EnCours: return 'status-in-progress';
-      case TypeStatus.Termine: return 'status-done';
-      default: return '';
+  getStatusClass(status: TypeStatus): string {
+    switch (status) {
+      case TypeStatus.EnAttente: 
+        return 'border-l-sky-400 bg-sky-50/50';
+      case TypeStatus.EnCours: 
+        return 'border-l-amber-500 bg-amber-50/50';
+      case TypeStatus.Termine: 
+        return 'border-l-emerald-500 bg-emerald-50/50';
+      default: 
+        return 'border-l-gray-300 bg-gray-50';
     }
   }
 
   //retourner la classe css correspondant à la priorité
-  getPriorityClass(priority: TypePriority): string{
-    switch(priority){
-      case TypePriority.Basse: return 'priority-low';
-      case TypePriority.Moyenne: return 'priority-medium';
-      case TypePriority.Haute: return 'priority-high';
-      default: return '';
+  getPriorityClass(priority: TypePriority): string {
+    switch (priority) {
+      case TypePriority.Basse: 
+        return 'bg-emerald-100 text-emerald-800';
+      case TypePriority.Moyenne: 
+        return 'bg-amber-100 text-amber-800';
+      case TypePriority.Haute: 
+        return 'bg-rose-100 text-rose-800';
+      default: 
+        return 'bg-gray-100 text-gray-800';
     }
   }
 }
