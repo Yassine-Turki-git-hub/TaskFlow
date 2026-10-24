@@ -16,6 +16,9 @@ export class ProjectList implements OnInit {
   private projectService = inject(ProjectService);
   projects = signal<ProjectModel[]>([]);
   searchTerm = signal<string>('');
+  //signal pour suivre l'ID du projet séléctionné (null pr=ar défaut)
+  selectedProjectId = signal<number | null>(null);
+
   filteredProjects = computed(() =>{
     const term = this.searchTerm().toLowerCase().trim();
     const currentProjects = this.projects();
@@ -32,8 +35,13 @@ export class ProjectList implements OnInit {
         this.projects.set(projectsData);
       });
   }
+  
   handleProjectSelection(selectedProject: ProjectModel): void {
-    console.log("Projet sélectionné:", selectedProject.name);
-    //logique métier ...
+    if (this.selectedProjectId() === selectedProject.id){
+      this.selectedProjectId.set(null);
+    } else {
+      this.selectedProjectId.set(selectedProject.id);
+    }
   }
+  
 }

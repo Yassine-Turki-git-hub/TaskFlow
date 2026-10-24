@@ -11,7 +11,11 @@
         <!--Liste des proejct cards-->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @for (proj of filteredProjects(); track proj.id) {
-                <app-project-card [project]="proj"></app-project-card>
+                <app-project-card 
+                    [project]="proj"
+                    [isSelected]="selectedProjectId() === proj.id"
+                    (selectProject)="handleProjectSelection($event)">
+                </app-project-card>
             } @empty {
                 <div class="col-span-full text-center py-12 bg-gray-50 rounded-xl border border-dashed border-gray-300">
                     <p class="text-gray-500 text-lg">Aucun projet ne correspond à votre recherche.</p>

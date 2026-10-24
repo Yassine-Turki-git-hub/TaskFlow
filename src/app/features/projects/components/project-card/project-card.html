@@ -1,28 +1,46 @@
-<div class="project-card" (click)="onSelectProject()">
-    <div class="card-header">
-        <h2>Project Id: {{project.id}}</h2>
-        <h3>Project name: {{project.name}}</h3>
-        <span class="badge" [ngClass]="project.status">Status: {{project.status}}</span>
-    </div>
-    <p class="description">{{project.description}}</p>
-    <!--affichage des taches du projet-->
-    <div class="tasks-section" *ngIf="project.tasks && project.tasks.length > 0">
-        <h4>Taches ({{project.tasks.length}}) :</h4>
-        <ul>
-            <li *ngFor="let task of project.tasks">
-                <span>{{task.id}}</span><br>
-                <span>{{task.title}}</span><br>
-                <span>{{task.priority}}</span><br>
-                <span>{{task.status}}</span>
-            </li>
-        </ul>
-    </div>
-    <div class="task-section" *ngIf="!project.tasks || project.tasks.length === 0">
-        <p class="no-tasks">Aucune tache</p>
-    </div>
-    <div class="card-footer">
-        <button class="select-btn" (click)="$event.stopPropagation(); onSelectProject()">
-            Sélectionner
+<div 
+    class="bg-white rounded-xl shadow-md p-6 border transition-all duration-300 flex flex-col justify-between cursor-pointer"
+    [ngClass]="{
+        'border-blue-500 ring-2 ring-blue-200 shadow-lg': isSelected,
+        'border-gray-100 hover:shadow-lg': !isSelected
+    }"
+    (click)="onSelectProject()"
+>
+    <div>
+        <!-- En-tête : Titre et Statut -->
+        <div class="flex justify-between items-start gap-4 mb-3">
+            <h3 class="text-xl font-bold text-gray-800 tracking-tight">{{ project.id }}</h3>
+            <h3 class="text-xl font-bold text-gray-800 tracking-tight">{{ project.name }}</h3>
+          
+          <span class="px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase"
+                [ngClass]="{
+                  'bg-amber-100 text-amber-800': project.status === TypeStatus.EnCours,
+                  'bg-emerald-100 text-emerald-800': project.status === TypeStatus.Termine,
+                  'bg-sky-100 text-sky-800': project.status === TypeStatus.EnAttente
+                }">
+            {{ project.status }}
+          </span>
+        </div>
+        <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ project.description }}</p>
+
+        <!-- Section Tâches : affichée uniquement si le projet est sélectionné -->
+        @if (isSelected) {
+          <div class="mb-4 animate-fadeIn">
+            <app-task-list [tasks]="project.tasks || []"></app-task-list>
+          </div>
+        } @else {
+          <p class="text-xs text-gray-400 italic mb-4">Cliquez pour voir les tâches...</p>
+        }
+      </div>
+
+      <!-- Bouton d'action -->
+      <div class="flex justify-end pt-2">
+        <button 
+          class="text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-200 shadow-sm"
+          [ngClass]="isSelected ? 'bg-gray-600 hover:bg-gray-700' : 'bg-blue-600 hover:bg-blue-700'"
+          (click)="$event.stopPropagation(); onSelectProject()"
+        >
+          {{ isSelected ? 'Fermer' : 'Sélectionner' }}
         </button>
+      </div>
     </div>
-</div>
