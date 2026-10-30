@@ -10,7 +10,7 @@
         <!-- En-tête : Titre et Statut -->
         <div class="flex justify-between items-start gap-4 mb-3">
             <h3 class="text-xl font-bold text-gray-800 tracking-tight">{{ project.id }}</h3>
-            <h3 class="text-xl font-bold text-gray-800 tracking-tight">{{ project.name }}</h3>
+            <h3 class="text-xl font-bold text-gray-800 tracking-tight">{{ project.name | uppercase }}</h3>
           
           <span class="px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase"
                 [ngClass]="{
@@ -21,7 +21,13 @@
             {{ project.status }}
           </span>
         </div>
-        <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ project.description }}</p>
+        <p class="text-gray-600 text-sm leading-relaxed">Description: <span class="text-black">{{ project.description }}</span></p>
+        <p class="text-gray-600 text-sm leading-relaxed">Starting date: <span class="text-green-600">{{project.startDate | date:'dd MMMM yyyy'}}</span></p>
+        <p class="text-gray-600 text-sm leading-relaxed">Budget: <span class="text-yellow-600">{{project.budget | currency:'TND':'symbol':'1.2-2':'fr'}}</span></p>
+        @if (project.tasks.length > 0){
+          <p class="text-gray-600 text-sm leading-relaxed">Taux de réalisation: <span class="text-yellow-600">{{this.getAccomplishmentRatio() | percent}}</span></p>
+          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Cout moyen par tache: <span class="text-yellow-600">{{project.budget/project.tasks.length | number:'1.0-0':'fr'}}</span></p>
+        }
 
         <!-- Section Tâches : affichée uniquement si le projet est sélectionné -->
         @if (isSelected) {
@@ -29,7 +35,10 @@
             <app-task-list [tasks]="project.tasks || []"></app-task-list>
           </div>
         } @else {
-          <p class="text-xs text-gray-400 italic mb-4">Cliquez pour voir les tâches...</p>
+          <div class="mb-4 animate-fadeIn">
+            <app-task-list [tasks]="(project.tasks | slice:0:3) || []"></app-task-list>
+          </div>
+          <p class="text-xs text-gray-400 italic mb-4">Cliquez pour voir le reste des tâches...</p>
         }
       </div>
 

@@ -5,5 +5,7 @@ export interface ProjectModel {
     name: string;
     description: string;
     status: TypeStatus;
+    startDate: string;
+    budget: number;
     tasks: TaskModel[];
 }

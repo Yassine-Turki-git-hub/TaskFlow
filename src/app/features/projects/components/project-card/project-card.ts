@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, KeyValuePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProjectModel } from '../../models/project.model';
 import { TaskList } from '../task-list/task-list';
@@ -24,4 +24,19 @@ export class ProjectCard {
   onSelectProject(): void {
     this.selectProject.emit(this.project);
   }
+
+  getAccomplishmentRatio(): number{
+    let completeTasks:number = 0;
+    for (const task of this.project.tasks){
+      if (task.status === TypeStatus.Termine)
+        completeTasks ++
+    }
+    return (completeTasks/this.project.tasks.length);
+  }
+  /*
+  getNumberOfTasksPerPriority(): number{
+
+    for (let task of this.project.tasks | KeyValuePipe )
+  }
+    */
 }

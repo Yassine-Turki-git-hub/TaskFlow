@@ -5,4 +5,6 @@ export interface TaskModel {
     title: string;
     priority: TypePriority;
     status: TypeStatus;
+    dueDate?: string;
+    description?: string;
 }
