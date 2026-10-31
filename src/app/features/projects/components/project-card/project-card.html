@@ -26,7 +26,12 @@
         <p class="text-gray-600 text-sm leading-relaxed">Budget: <span class="text-yellow-600">{{project.budget | currency:'TND':'symbol':'1.2-2':'fr'}}</span></p>
         @if (project.tasks.length > 0){
           <p class="text-gray-600 text-sm leading-relaxed">Taux de réalisation: <span class="text-yellow-600">{{this.getAccomplishmentRatio() | percent}}</span></p>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Cout moyen par tache: <span class="text-yellow-600">{{project.budget/project.tasks.length | number:'1.0-0':'fr'}}</span></p>
+          <p class="text-gray-600 text-sm leading-relaxed">Cout moyen par tache: <span class="text-yellow-600">{{project.budget/project.tasks.length | number:'1.0-0':'fr'}}</span></p>
+        }
+        @for (item of getNumberOfTasksPerPriority() | keyvalue; track item.key){
+          <p class="text-gray-600 text-sm leading-relaxed">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded uppercase" [ngClass]="getPriorityClass(item.key)">Nombre de taches de priorité  {{item.key}}: {{item.value}}</span>
+          </p>
         }
 
         <!-- Section Tâches : affichée uniquement si le projet est sélectionné -->
