@@ -3,9 +3,11 @@ import { TaskModel } from '../../models/task.model';
 import {TypeStatus} from '../../models/type-status';
 import {TypePriority} from '../../models/type-priority';
 import { CommonModule } from '@angular/common';
+import { TruncatePipe } from '../../../../shared/pipes/truncate.pipe';
+import { DeadlinePipe } from '../../../../shared/pipes/deadline.pipe';
 
 @Component({
-  imports: [CommonModule],
+  imports: [CommonModule, TruncatePipe, DeadlinePipe],
   standalone:true,
   selector: 'app-task-list',
   styleUrl: './task-list.css',
@@ -13,6 +15,8 @@ import { CommonModule } from '@angular/common';
 })
 export class TaskList {
   @Input({required: true}) tasks: TaskModel[] = [];
+  readonly TypePriority = TypePriority;
+  
   //retourner la classe css corespondantau statut
   getStatusClass(status: TypeStatus): string {
     switch (status) {
